@@ -5,7 +5,7 @@
     <span v-if = "!isHidden">Show</span>
   </button>
   <ul v-if = this.isHidden>
-    <li v-for = "  a in list" :key = "a.id"><a :href="a.link">{{ a.name }}</a> </li>
+    <li  v-for = "  a in list" :key = "a.id" @click.prevent = "guka"><a :href="a.link">{{ a.name }}</a> </li>
   </ul>
 </template>
 
@@ -33,8 +33,9 @@ export default {
     methods: {
       showHide(){
         this.isHidden = !this.isHidden
-
-        
+      },
+      guka(e){
+        console.log(e.target.innerHTML+  " Link: "+e.target.href )
       }
     }
  
