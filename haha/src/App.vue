@@ -5,7 +5,7 @@
     <span v-if = "!isHidden">Show</span>
   </button>
   <ul v-if = this.isHidden>
-    <li v-for = "a in list">><a :href="a.link">{{ a.name }}</a> </li>
+    <li v-for = "  a in list" :key = "a.id"><a :href="a.link">{{ a.name }}</a> </li>
   </ul>
 </template>
 
