@@ -7,7 +7,7 @@ export default {
       height: null,
       simagle: null,
       show: true,
-      color: "blue"
+      myColor: null
     }
   },
   computed: {
@@ -27,6 +27,7 @@ export default {
 <template>
   <div>
     <form>
+      <input type="color" v-model = "myColor">
 
       <label>სიგრძე</label><br />
       <input v-model="width" /><br />
@@ -47,7 +48,7 @@ export default {
   </div>
   <br/>
 
-  <div v-bind:style="{ width: width + 'px', height: height + 'px',backgroundColor: color, }"></div>
+  <div v-bind:style="{ width: width + 'px', height: height + 'px',backgroundColor: myColor, }"></div>
 
 
 </template>
