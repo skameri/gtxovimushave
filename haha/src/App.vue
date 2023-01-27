@@ -1,60 +1,113 @@
-<script>
-
-export default {
-  data() {
-    return {
-      width: null,
-      height: null,
-      simagle: null,
-      show: true,
-      myColor: null
-    }
-  },
-  computed: {
-    calculateSpace(){
-      return this.width * this.height
-    },
-    calculateMoculoba(){
-      return this.calculateSpace * this.simagle
-    }
-    
-
-  }
-}
-
-</script>
-
 <template>
-  <div>
-    <form>
-      <input type="color" v-model = "myColor">
-
-      <label>სიგრძე</label><br />
-      <input v-model="width" /><br />
-
-      <label>სიგანე</label><br />
-      <input v-model="height" /><br />
-      
-      <label>სიმაღლე</label><br />
-      <input v-model="simagle" /><br />
+  <div v-if = "visible" >
+    <form v-bind:style="{ display: none }" >
+      <label>
+        <input placeholder="Your school e-mail"  type="email" v-model="email" class="form-input" />
+      </label>
+      <br />
+      <label>
+        <input placeholder="Group number"  v-model="group" class="form-input" />
+      </label>
+      <br />
+      <button @click="submitForm" class="form-button">Start the test</button>
     </form>
-    <br />
-    <button @click.prevent="show = !show">
-      <span v-if="!show">Show</span>
-      <span v-if="show">Hide</span>
-    </button>
-    <p v-if="show">ფართობი: {{ calculateSpace }}</p>
-    <p v-if="show">მოცულობა: {{ calculateMoculoba }}</p>
   </div>
-  <br/>
 
-  <div v-bind:style="{ width: width + 'px', height: height + 'px',backgroundColor: myColor, }"></div>
+  <div v-if = !visible class="test-page">
+    <div class="gurami">
+      {{ ragaca }}
+
+    </div>
+    <input  v-for = "a in questions" type="text"  :id=a.question placeholder="Answer here" class="answer-button" :v-model = a.answer @click = showQuestion>
+    <p>Exam for group N:{{ group }}</p>
+    <p>press the input to check the question</p>
+    <button   class="form-button">Submit</button>
+  </div>
 
 
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      email: '',
+      group: null,
+      visible: true,
+      answer1: null,
+      answer2: null,
+      answer3: null,
+      ragaca: null,
+      questions: [
+        {id: 1,question: "The side of a square is 5 meters,find area", answer: "25"},
+        {id: 2,question: "Which number is larger, -5 or -3", answer: "-3"},
+        {id: 3,question: "What is 85% of 21", answer: "17.85"}
+      ]
+    }
+  },
+  methods: {
+    showQuestion(e){
+      this.ragaca = e.target.id
+
+    },
+    submitForm() {
+
+      this.visible = false
+      console.log(this.email)
+   
+    }
+  }
+}
+</script>
+
 <style>
+.form-input {
+  width: 300px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+}
+.answer-button{
+  width: 300px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  display:block ;
 
+}
+.gurami{
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.password{
+  display: inline;
+  margin: -10px;
+}
 
+.form-button {
+  width: 200px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
+.form-button:hover {
+  background-color: #45a049;
+}
+
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #84D2C5;
+}
 </style>
