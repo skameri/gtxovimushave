@@ -18,11 +18,16 @@
       {{ ragaca }}
 
     </div>
-    <input  v-for = "a in questions" type="text"  :id=a.question placeholder="Answer here" class="answer-button" :v-model = a.answer @click = showQuestion>
+    <input v-bind:style="{backgroundColor: color }"  v-for = "a in questions" type="text"  :id=a.question placeholder="Answer here" class="answer-button" :v-model = answer1  @click = showQuestion >
     <p>Exam for group N:{{ group }}</p>
     <p>press the input to check the question</p>
     <button   class="form-button">Submit</button>
+
+
   </div>
+
+ 
+  
 
 
 </template>
@@ -31,13 +36,14 @@
 export default {
   data() {
     return {
-      email: '',
+      email: null,
       group: null,
       visible: true,
       answer1: null,
       answer2: null,
       answer3: null,
       ragaca: null,
+      color: null,
       questions: [
         {id: 1,question: "The side of a square is 5 meters,find area", answer: "25"},
         {id: 2,question: "Which number is larger, -5 or -3", answer: "-3"},
@@ -46,14 +52,24 @@ export default {
     }
   },
   methods: {
+    submit(){
+      
+
+    },
     showQuestion(e){
       this.ragaca = e.target.id
 
     },
     submitForm() {
+      if(this.group!=null && this.email!=null){
+        this.visible = false
+        console.log(this.email)
 
-      this.visible = false
-      console.log(this.email)
+      }
+      else{
+        alert("Enter your e-mail and group number")
+      }
+     
    
     }
   }
