@@ -91,10 +91,10 @@
       
     },
     computed: {
-      filterCars() {
-        return this.car.filter(
-          (a) => a.name.toLowerCase().match(this.search.toLowerCase())
-        );
+      filterCars: function(){
+        return this.car.filter((a) => {
+          return a.name.toLowerCase().match(this.search.toLowerCase())
+        })
       },
       totalPages() {
         return Math.ceil(this.filterCars.length / this.itemsPerPage);
